@@ -1,5 +1,5 @@
 // admin.js - GrowOnboard
-const API_BASE = (location.hostname === 'localhost') ? 'http://localhost:5000' : 'https://YOUR_BACKEND_DOMAIN';
+const API_BASE = (location.hostname === 'localhost') ? 'http://localhost:5000' : 'https://growonboard.onrender.com';
 
 // ---------- Firebase client config ----------
 const firebaseConfig = {
