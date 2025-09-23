@@ -10,8 +10,11 @@ const notif = require('./notifService');
 const app = express();
 
 // ---------------- MIDDLEWARE ----------------
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
+// Allow all origins (simplest)
+
+
 
 // ---------------- FIREBASE ADMIN INIT ----------------
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
