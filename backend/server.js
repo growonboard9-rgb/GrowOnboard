@@ -14,11 +14,10 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 
 // ---------------- FIREBASE ADMIN INIT ----------------
-const serviceAccountPath = path.resolve(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
-
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
 
 admin.initializeApp({
-  credential: admin.credential.cert(require(serviceAccountPath)),
+  credential: admin.credential.cert(serviceAccount),
 });
 const db = admin.firestore();
 notif.init(admin);
