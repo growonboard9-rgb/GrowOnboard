@@ -2,7 +2,7 @@
 const API_BASE =
   location.hostname === "localhost" || location.hostname === ""
     ? "http://localhost:5000"
-    : "https://growonboard.onrender.com/";
+    : "https://growonboard.onrender.com";
 
 // ----------------- UTILITIES -----------------
 function escapeHtml(s) {
@@ -221,5 +221,6 @@ function revealAnimate() {
     setTimeout(() => el.classList.add("in"), i * 80);
   });
 }
+
 
 
