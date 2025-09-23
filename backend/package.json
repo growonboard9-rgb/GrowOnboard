@@ -1,0 +1,32 @@
+{
+  "name": "tube2career-backend",
+  "version": "1.0.0",
+  "description": "Backend for Tube2Career (Node + Express + Firebase)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "cross-env FIREBASE_SERVICE_ACCOUNT_JSON=learninghub-7ac22-firebase-adminsdk-fbsvc-dcfedf7d84.json nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "firebase-admin": "^11.11.1",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.10.1",
+    "punycode": "^2.3.1",
+    "twilio": "^4.23.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
