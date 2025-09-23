@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us — GrowOnboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --glass: rgba(255, 107, 107, 0.1);
+      --muted: #666666;
+      --accent: #ff6b6b;
+      --accent-2: #ff8e53;
+      --success: #22c55e;
+      --danger: #ff4757;
+      --border-color: rgba(255, 107, 107, 0.2);
+      --glass-2: rgba(255, 107, 107, 0.05);
+      --text: #333333;
+      --text-light: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .site-header .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+      opacity: 0.98;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-btn:hover {
+      color: var(--accent);
+    }
+
+    /* Hamburger Menu */
+    .hamburger-btn {
+      display: none; /* Hidden by default */
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1001;
+    }
+
+    .hamburger-btn:focus {
+      outline: none;
+    }
+
+    .hamburger-btn span {
+      width: 2rem;
+      height: 0.25rem;
+      background: var(--text);
+      border-radius: 10px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: flex;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        flex-direction: column;
+        padding: 20px 0;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+
+      nav.active {
+        display: flex;
+      }
+        .brand img {
+      width: 65px;
+      height: 65px;
+      margin-right: 8px
+    }
+
+    main.container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 24px 32px;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: 28px;
+      color: var(--text);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 24px;
+      margin-bottom: 8px;
+      color: var(--accent-2);
+      text-align: center;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      text-align: justify;
+    }
+
+    li {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    li::before {
+      content: '✓';
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+    }
+
+    footer.site-footer {
+      max-width: 1240px;
+      margin: 80px auto 40px;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 24px;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 0;
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.1);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--glass);
+      color: var(--accent);
+    }
+
+    .dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .nav-dropdown:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }}
+
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="./index.html" class="brand" title="Triple-tap for admin access"><img src="./Logo.png" alt="GrowOnboard logo featuring stylized orange letters G and O forming an upward arrow inside a circle, with the text GrowOnboard Jobs and Learning below in orange, conveying a positive and uplifting tone">GrowOnboard</a>
+      <button class="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="nav-dropdown">
+          <button class="nav-btn">About <span class="dropdown-arrow">▼</span></button>
+          <div class="dropdown-menu">
+            <a href="./about.html">About Us</a>
+            <a href="./contact.html">Contact Us</a>
+            <a href="./community.html">Community</a>
+          </div>
+        </div>
+        <a href="./jobs.html" class="nav-btn">Jobs</a>
+        <a href="./videos.html" class="nav-btn">Learning</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h1 id="about-title">About GrowOnboard</h1>
+      <p>
+        Welcome to GrowOnboard, your gateway to a successful career in the tech industry. Our platform is built on a
+        simple yet powerful idea: to bridge the gap between learning and earning. We believe that everyone, regardless
+        of their background, should have access to high-quality educational resources and career opportunities,
+        completely free of charge.
+      </p>
+
+      <h3>Our Mission</h3>
+      <p>
+        Our mission is to empower aspiring tech professionals by providing a curated collection of the best learning
+        materials and a direct path to relevant job openings. We meticulously select video tutorials from experts across
+        the web and pair them with the latest job listings from top companies to create a seamless journey from student
+        to professional.
+      </p>
+
+      <h3>What We Offer</h3>
+      <ul>
+        <li><strong>Curated Learning Hub:</strong> Hand-picked video tutorials to help you master in-demand programming
+          languages and technologies at your own pace.</li>
+        <li><strong>Live Job Board:</strong> Explore the latest career opportunities in the tech world, from internships
+          to senior roles.</li>
+        <li><strong>A Direct Path:</strong> We connect the dots between the skills you learn and the jobs that require
+          them.</li>
+        <li><strong>Completely Free:</strong> All our resources are available for free. No subscriptions, no hidden
+          fees.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2024 GrowOnboard • Learn. Apply. Grow.</span>
+    <div class="footer-links">
+      <a href="./about.html">About</a>
+      <a href="./contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Hamburger menu toggle
+      const hamburger = document.querySelector('.hamburger-btn');
+      const nav = document.getElementById('main-nav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          nav.classList.toggle('active');
+          const isExpanded = nav.classList.contains('active');
+          hamburger.setAttribute('aria-expanded', isExpanded);
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>

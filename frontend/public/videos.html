@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Learning Videos — GrowOnboard</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --glass: rgba(255, 107, 107, 0.1);
+      --muted: #666666;
+      --accent: #ff6b6b;
+      --accent-2: #ff8e53;
+      --success: #22c55e;
+      --danger: #ff4757;
+      --border-color: rgba(255, 107, 107, 0.2);
+      --glass-2: rgba(255, 107, 107, 0.05);
+      --text: #333333;
+      --text-light: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+        .brand img {
+      width: 65px;
+      height: 65px;
+      margin-right: 8px
+    }
+
+    body {
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 80px;
+    }
+
+    /* header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .site-header .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+      opacity: 0.98;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-btn:hover {
+      color: var(--accent);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 0;
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.1);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--glass);
+      color: var(--accent);
+    }
+
+    .dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .nav-dropdown:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Hamburger Menu */
+    .hamburger-btn {
+      display: none; /* Hidden by default */
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1001;
+    }
+
+    .hamburger-btn:focus {
+      outline: none;
+    }
+
+    .hamburger-btn span {
+      width: 2rem;
+      height: 0.25rem;
+      background: var(--text);
+      border-radius: 10px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: flex;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        flex-direction: column;
+        padding: 20px 0;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+
+      nav.active {
+        display: flex;
+      }
+      
+      .search-section h1{
+        text-align: center;
+      }
+      
+      .search-section p{
+        text-align: center;
+      }
+      .search-controls select{
+            width: 160px;
+      }
+    }
+
+    /* container */
+    main.container {
+      max-width: 1240px;
+      margin: 34px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* search section */
+    .search-section {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      border: 1px solid var(--border-color);
+    }
+
+    .search-section h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .search-section p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-controls input {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      min-width: 300px;
+      transition: all 0.2s;
+    }
+
+    .search-controls input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+    }
+
+    .search-controls select {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .search-controls input::placeholder {
+      color: var(--muted);
+    }
+
+    /* grid of cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width:700px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+      .search-controls input {
+        min-width: 335px;
+      }
+    }
+
+    /* video card */
+    .video-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-radius: 12px;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .video-card-link:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-card {
+      display: flex;
+      background: var(--glass-2);
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .video-thumb {
+      width: 140px;
+      min-width: 140px;
+      height: 86px;
+      background: linear-gradient(90deg, rgba(108, 99, 255, 0.12), rgba(255, 184, 107, 0.06));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-thumb .play {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .video-card-link:hover .play {
+      transform: scale(1.1);
+    }
+
+    .video-body {
+      padding: 0 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .video-title {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.3;
+      transition: color 0.2s;
+    }
+
+    .video-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .video-date {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      display: none;
+    }
+
+    .video-card-link:hover .video-title {
+      color: var(--accent);
+    }
+
+    .video-thumb-link {
+      display: block;
+      padding: 8px;
+    }
+
+    /* empty state */
+    .empty {
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--glass-2);
+      grid-column: 1 / -1;
+    }
+
+    /* skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      background-size: 200% 100%;
+      animation: shimmer 1.2s linear infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0
+      }
+
+      100% {
+        background-position: -200% 0
+      }
+    }
+
+    /* reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .45s ease, transform .45s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    /* footer */
+    footer.site-footer {
+      max-width: 1240px;
+      margin: 80px auto 40px;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 24px;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      footer.site-footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-links a {
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="./index.html" class="brand"><img src="./Logo.png" alt="GrowOnboard">GrowOnboard</a>
+      <button class="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="nav-dropdown">
+          <button class="nav-btn">About <span class="dropdown-arrow">▼</span></button>
+          <div class="dropdown-menu">
+            <a href="./about.html">About Us</a>
+            <a href="./contact.html">Contact Us</a>
+            <a href="./community.html">Community</a>
+          </div>
+        </div>
+        <a href="./jobs.html" class="nav-btn">Jobs</a>
+        <a href="./videos.html" class="nav-btn">Learning</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="search-section">
+      <h1>Learning Videos</h1>
+      <p>Explore our curated collection of programming tutorials, sorted by latest uploads first.</p>
+      
+      <div class="search-controls">
+        <input id="searchInput" placeholder="Search videos by title, language, or keyword..." />
+        <select id="languageFilter">
+          <option value="">All Languages</option>
+          <option>Python</option>
+          <option>Java</option>
+          <option>SQL</option>
+          <option>HTML</option>
+          <option>CSS</option>
+          <option>JS</option>
+        </select>
+      </div>
+      
+      <div id="videoGrid" class="grid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2024 GrowOnboard • Learn. Apply. Grow.</span>
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // ----------------- CONFIG -----------------
+    const API_BASE = location.hostname === "localhost" || location.hostname === "" 
+      ? "http://localhost:5000" 
+      : "https://YOUR_BACKEND_DOMAIN";
+
+    // ----------------- UTILITIES -----------------
+    function escapeHtml(s) {
+      return String(s || "").replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+      );
+    }
+
+    function getYouTubeVideoId(url) {
+      if (!url) return null;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+    }
+
+    // ----------------- API -----------------
+    async function fetchVideos() {
+      try {
+        const res = await fetch(`${API_BASE}/api/videos`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const videos = await res.json();
+        // Sort by date (latest first)
+        return videos.sort((a, b) => new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0));
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        return [];
+      }
+    }
+
+    // ----------------- UI BUILDERS -----------------
+    function videoCardHTML(v) {
+      const videoId = getYouTubeVideoId(v.link);
+      const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
+      const thumbStyle = thumbnailUrl ? `style="background-image: url('${thumbnailUrl}')"` : '';
+
+      return `
+        <a href="${v.link || '#'}" target="_blank" rel="noopener" class="video-card-link reveal">
+          <div class="video-card">
+            <div class="video-thumb" ${thumbStyle}>
+              <div class="play">▶</div>
+            </div>
+            <div class="video-body">
+              <div class="video-title">${escapeHtml(v.title || "Untitled")}</div>
+              <div class="video-meta">${escapeHtml(v.language || "")} • ${escapeHtml(v.category || "")}</div>
+              <div class="video-date">${formatDate(v.date || v.createdAt)}</div>
+            </div>
+          </div>
+        </a>
+      `;
+    }
+
+    // ----------------- SEARCH & FILTER -----------------
+    function filterVideos(videos, searchTerm, languageFilter) {
+      return videos.filter(video => {
+        const matchesSearch = !searchTerm || 
+          (video.title && video.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (video.language && video.language.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (video.category && video.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (video.description && video.description.toLowerCase().includes(searchTerm.toLowerCase()));
+
+        const matchesLanguage = !languageFilter || 
+          (video.language && video.language.toLowerCase() === languageFilter.toLowerCase());
+
+        return matchesSearch && matchesLanguage;
+      });
+    }
+
+    function renderVideos(videos) {
+      const grid = document.getElementById('videoGrid');
+      
+      if (videos.length === 0) {
+        grid.innerHTML = '<div class="empty">No videos found matching your criteria.</div>';
+        return;
+      }
+
+      grid.innerHTML = videos.map(videoCardHTML).join('');
+      revealAnimate();
+    }
+
+    // ----------------- INIT -----------------
+    document.addEventListener("DOMContentLoaded", async () => {
+      const searchInput = document.getElementById('searchInput');
+      const languageFilter = document.getElementById('languageFilter');
+      
+      // Load all videos
+      let allVideos = await fetchVideos();
+      
+      // Initial render
+      renderVideos(allVideos);
+
+      // Real-time search
+      let searchTimeout;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          const filteredVideos = filterVideos(allVideos, searchInput.value, languageFilter.value);
+          renderVideos(filteredVideos);
+        }, 300); // 300ms delay for real-time search
+      });
+
+      // Language filter
+      languageFilter.addEventListener('change', () => {
+        const filteredVideos = filterVideos(allVideos, searchInput.value, languageFilter.value);
+        renderVideos(filteredVideos);
+      });
+
+      // Hamburger menu toggle
+      const hamburger = document.querySelector('.hamburger-btn');
+      const nav = document.getElementById('main-nav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          nav.classList.toggle('active');
+          const isExpanded = nav.classList.contains('active');
+          hamburger.setAttribute('aria-expanded', isExpanded);
+        });
+      }
+    });
+
+    // ----------------- ANIMATIONS -----------------
+    function revealAnimate() {
+      document.querySelectorAll(".reveal").forEach((el, i) => {
+        setTimeout(() => el.classList.add("in"), i * 80);
+      });
+    }
+  </script>
+</body>
+
+</html>

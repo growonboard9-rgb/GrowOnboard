@@ -1,0 +1,1630 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GrowOnboard — Learn | Grow | Achieve</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --glass: rgba(255, 107, 107, 0.1);
+      --muted: #666666;
+      --accent: #ff6b6b;
+      --accent-2: #ff8e53;
+      --success: #22c55e;
+      --danger: #ff4757;
+      --border-color: rgba(255, 107, 107, 0.2);
+      --glass-2: rgba(255, 107, 107, 0.05);
+      --text: #333333;
+      --text-light: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      color: var(--text);
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 80px;
+    }
+
+    /* header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .site-header .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.2px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.2s;
+      opacity: 0.98;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-btn:hover {
+      color: var(--accent);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 0;
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--glass);
+      color: var(--accent);
+    }
+
+    .dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .nav-dropdown:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Hamburger Menu */
+    .hamburger-btn {
+      display: none;
+      /* Hidden by default */
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1001;
+    }
+
+    .hamburger-btn:focus {
+      outline: none;
+    }
+
+    .hamburger-btn span {
+      width: 2rem;
+      height: 0.25rem;
+      background: var(--text);
+      border-radius: 10px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: flex;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        flex-direction: column;
+        padding: 20px 0;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      nav.active {
+        display: flex;
+      }
+    }
+
+    /* container */
+    main.container {
+      max-width: 1240px;
+      margin: 34px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* stacked on mobile */
+    @media (max-width:980px) {
+      main.container {
+        grid-template-columns: 1fr;
+        padding: 0 16px
+      }
+    }
+
+    /* left column sections */
+    .section {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 20px;
+      color: var(--text);
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .section-intro {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      margin-top: -8px;
+    }
+
+    /* controls */
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .controls .select,
+    .controls .search {
+      background: var(--glass);
+      border-radius: 10px;
+      padding: 8px 10px;
+      color: var(--muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .controls .search {
+      min-width: 200px
+    }
+
+    .controls button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .12s ease
+    }
+
+    .controls button:hover {
+      transform: translateY(-3px)
+    }
+
+    /* grid of cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px
+    }
+
+    @media (max-width:700px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* video card */
+    .video-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-radius: 12px;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .video-card-link:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-card {
+      display: flex;
+      background: var(--glass-2);
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .video-thumb {
+      width: 160px;
+      min-width: 160px;
+      height: 90px;
+      background: linear-gradient(90deg, rgba(108, 99, 255, 0.12), rgba(255, 184, 107, 0.06));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-thumb .play {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .video-card-link:hover .play {
+      transform: scale(1.1);
+    }
+
+    .video-body {
+      padding: 0 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .video-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.3;
+      transition: color 0.2s;
+    }
+
+    .video-meta {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .video-title-link {
+      text-decoration: none;
+    }
+
+    .video-card-link:hover .video-title {
+      color: var(--accent);
+    }
+
+    .video-thumb-link {
+      display: block;
+      padding: 8px;
+    }
+
+    /* job card */
+    .job-card {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--glass-2);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid transparent;
+      min-height: 150px;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .job-card:hover {
+      transform: translateY(-6px)
+    }
+
+    .job-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .job-company {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-2);
+    }
+
+    .job-description {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .job-meta {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .job-deadline {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.03)
+    }
+
+    .apply-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px
+    }
+
+    .apply-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .apply-btn:hover {
+      background: rgba(108, 99, 255, 0.08);
+      color: #fff
+    }
+
+    /* right column (sidebar) */
+    aside.sidebar {
+      position: relative
+    }
+
+    .card-side {
+      border-radius: 12px;
+      padding: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .community-links a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 8px;
+      transition: color .2s;
+    }
+
+    .community-links a:hover {
+      color: var(--accent);
+    }
+
+    /* skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      background-size: 200% 100%;
+      animation: shimmer 1.2s linear infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0
+      }
+
+      100% {
+        background-position: -200% 0
+      }
+    }
+
+    /* reveal animation class applied by JS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .45s ease, transform .45s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    /* toast */
+    .toast-wrap {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end
+    }
+
+    .toast {
+      min-width: 260px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 4px solid var(--accent);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .32s ease, transform .32s ease
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: none
+    }
+
+    .toast.success {
+      border-left-color: var(--success)
+    }
+
+    .toast.error {
+      border-left-color: var(--danger)
+    }
+
+    .toast .tmsg {
+      font-size: 13px;
+      color: #fff
+    }
+
+    /* empty state */
+    .empty {
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--glass-2)
+    }
+
+    /* form styles */
+    input,
+    select {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      color: #fff;
+      width: 100%;
+    }
+
+    input::placeholder {
+      color: var(--muted);
+    }
+
+    button[type="submit"] {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* footer */
+    footer.site-footer {
+      max-width: 1240px;
+      margin: 80px auto 40px;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 24px;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      footer.site-footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-links a {
+        margin: 0 10px;
+      }
+      .video-card{
+        flex-direction: column;
+        height: 200px;
+        text-align: center;
+        border-radius: 20px;
+      }
+    }
+
+    /* tab buttons */
+    .tab {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      color: var(--muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .tab:not(.active):hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 70px 20px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(255, 142, 83, 0.05) 100%);
+    }
+
+    .hero .wrap {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 16px auto 24px;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--glass);
+      color: var(--text);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 60px 0;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.03) 0%, rgba(255, 142, 83, 0.03) 100%);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 40px 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .stat-card:hover::before {
+      left: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+    }
+
+    .stat-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-number {
+      transform: scale(1.1);
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* New layout for jobs section */
+    .jobs-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 980px) {
+      .jobs-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .jobs-sidebar {
+        margin-top: 24px;
+      }
+    }
+
+    .jobs-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .expand-btn {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .expand-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: 12px;
+      position: relative;
+      padding: 10px 0;
+      -webkit-overflow-scrolling: touch;
+      /* This is important to prevent snapping which interferes with smooth JS scroll */
+      scroll-snap-type: none; 
+      scrollbar-width: none; /* For Firefox */
+      -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
+
+    /* nav buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 7;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .carousel-btn.prev {
+      left: 6px;
+    }
+
+    .carousel-btn.next {
+      right: 6px;
+    }
+
+    .brand img {
+      width: 65px;
+      height: 65px;
+      margin-right: 8px
+    }
+
+    @media (max-width:700px) {
+      .carousel-btn {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    @media (hover:none) {
+      .carousel-btn {
+        display: none;
+      }
+    }
+
+    .carousel {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      align-items: stretch;
+    }
+
+    .carousel:hover {
+      animation-play-state: paused;
+    }
+
+    @media (max-width: 700px) {
+      .carousel-item {
+        flex-basis: 240px;
+        min-width: 240px;
+      }
+
+      .video-thumb {        
+        width: 239px;
+        min-width: 140px;
+        height: 132px;
+      }
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Notification Section */
+    .notification-section {
+      margin-top: 40px;
+    }
+
+    .notification-forms {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .notification-forms {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card {
+        width: 85%;
+        margin-left: 35px;
+      }
+      #videoNotificationTitle, #jobNotificationTitle {
+        margin-left: 70px;
+      }
+      .section-intro{
+        text-align: center;
+      }
+    }
+
+    .notification-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .notification-form input {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .notification-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    }
+
+    .notification-form input::placeholder {
+      color: var(--muted);
+    }
+
+    .notification-form button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .notification-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="./index.html" class="brand"><img src="./Logo.png" alt="GrowOnboard">GrowOnboard</a>
+      <button class="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="nav-dropdown">
+          <button class="nav-btn">About <span class="dropdown-arrow">▼</span></button>
+          <div class="dropdown-menu">
+            <a href="./about.html">About Us</a>
+            <a href="./contact.html">Contact Us</a>
+            <a href="./community.html">Community</a>
+          </div>
+        </div>
+        <a href="./jobs.html" class="nav-btn">Jobs</a>
+        <a href="./videos.html" class="nav-btn">Learning</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Grow Your Career with GrowOnboard</h1>
+      <p>Master in-demand skills with our curated video tutorials and find your dream job in the tech industry. All in
+        one place, completely free.</p>
+      <div class="hero-cta">
+        <a href="./videos.html" class="btn-primary">Start Learning</a>
+        <a href="./jobs.html" class="btn-secondary">Find Jobs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <div class="stat-icon">📹</div>
+          <div class="stat-number" id="totalVideos">0</div>
+          <div class="stat-label">Total Videos</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-icon">💼</div>
+          <div class="stat-number" id="totalJobs">0</div>
+          <div class="stat-label">Total Jobs</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-icon">👥</div>
+          <div class="stat-number" id="totalSubscribers">0</div>
+          <div class="stat-label">Subscribers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Latest Videos Section -->
+    <div class="section reveal" id="latestVideosSection">
+      <div class="section-header">
+        <h2>Latest Learning Videos</h2>
+        <a href="./videos.html" class="expand-btn">Show All</a>
+      </div>
+      <p class="section-intro">Stay updated with our latest programming tutorials and tech content.</p>
+      <div class="carousel-container">
+        <div id="latestVideosCarousel" class="carousel">
+          <!-- Videos will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Jobs Section -->
+    <div class="section reveal" id="latestJobsSection">
+      <div class="section-header">
+        <h2>Latest Job Opportunities</h2>
+        <a href="./jobs.html" class="expand-btn">Show All</a>
+      </div>
+      <p class="section-intro">Discover the newest career opportunities in the tech industry.</p>
+      <div class="carousel-container">
+        <div id="latestJobsCarousel" class="carousel">
+          <!-- Jobs will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Forms Section -->
+    <div class="notification-section">
+      <div class="notification-forms">
+        <!-- Video Notifications Form -->
+        <div class="section reveal">
+          <h2 id="videoNotificationTitle">📹 Video Notifications</h2>
+          <p class="section-intro">Get notified when new learning videos are added.</p>
+          <form id="videoNotificationForm" class="notification-form">
+            <input name="name" placeholder="Your name (optional)" />
+            <input name="email" placeholder="Email" type="email" required />
+            <input name="whatsapp" placeholder="WhatsApp number (e.g. +9198...)" />
+            <input name="telegram" placeholder="Telegram chat id or @username" />
+            <button type="submit">Subscribe to Video Updates</button>
+          </form>
+        </div>
+
+        <!-- Job Notifications Form -->
+        <div class="section reveal">
+          <h2 id="jobNotificationTitle">💼 Job Notifications</h2>
+          <p class="section-intro">Get notified when new job opportunities are posted.</p>
+          <form id="jobNotificationForm" class="notification-form">
+            <input name="name" placeholder="Your name (optional)" />
+            <input name="email" placeholder="Email" type="email" required />
+            <input name="whatsapp" placeholder="WhatsApp number (e.g. +9198...)" />
+            <input name="telegram" placeholder="Telegram chat id or @username" />
+            <button type="submit">Subscribe to Job Updates</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card-side reveal">
+      <h4>Why GrowOnboard?</h4>
+      <ul class="feature-list">
+        <li>✓ Curated high-quality learning videos.</li>
+        <li>✓ Latest job openings from top companies.</li>
+        <li>✓ Direct path from learning to earning.</li>
+        <li>✓ Completely free for everyone.</li>
+      </ul>
+    </div>
+    <div class="card-side reveal">
+      <h4 style="margin-bottom:8px">Community</h4>
+      <div class="community-links">
+        <a href="mailto:contact@growonboard.com" target="_blank" rel="noopener">📧 Email</a>
+        <a href="https://instagram.com/growonboard" target="_blank" rel="noopener">📷 Instagram</a>
+        <a href="https://wa.me/1234567890" target="_blank" rel="noopener">💬 WhatsApp Group</a>
+        <a href="https://linkedin.com/company/growonboard" target="_blank" rel="noopener">💼 LinkedIn</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <footer class="site-footer">
+    <span>© 2024 GrowOnboard • Learn. Apply. Grow.</span>
+    <div class="footer-links">
+      <a href="./about.html">About</a>
+      <a href="./contact.html">Contact</a>
+      <a href="mailto:contact@growonboard.com">📧 Email</a>
+      <a href="https://instagram.com/growonboard" target="_blank">📷 Instagram</a>
+      <a href="https://wa.me/1234567890" target="_blank">💬 WhatsApp</a>
+      <a href="https://linkedin.com/company/growonboard" target="_blank">💼 LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- app script -->
+  <script src="./js/app.js"></script>
+  <script>
+    // ----------------- CONFIG -----------------
+    // API_BASE is already declared in app.js, so we'll use it from there
+    // const API_BASE = location.hostname === "localhost" || location.hostname === "" 
+    //   ? "http://localhost:5000" 
+    //   : "https://YOUR_BACKEND_DOMAIN";
+
+    // ----------------- UTILITIES -----------------
+    function escapeHtml(s) {
+      return String(s || "").replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+      );
+    }
+
+    function getYouTubeVideoId(url) {
+      if (!url) return null;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    // Toast notification system
+    function showToast(msg, type = "success") {
+      const wrap = document.getElementById("toastWrap");
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<span class="tmsg">${msg}</span>`;
+      wrap.appendChild(toast);
+
+      setTimeout(() => toast.classList.add("show"), 30);
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    // ----------------- API -----------------
+    async function fetchVideos() {
+      try {
+        const res = await fetch(`${API_BASE}/api/videos`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const videos = await res.json();
+        return videos.sort((a, b) => new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0));
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        return [];
+      }
+    }
+
+    async function fetchJobs() {
+      try {
+        const res = await fetch(`${API_BASE}/api/jobs`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const jobs = await res.json();
+        return jobs.sort((a, b) => new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0));
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        return [];
+      }
+    }
+
+    // ----------------- CAROUSEL BUILDERS -----------------
+    function createVideoCarouselHTML(videos) {
+      const latestVideos = videos.slice(0, 6);
+      return latestVideos.map(v => {
+        const videoId = getYouTubeVideoId(v.link);
+        const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
+        const thumbStyle = thumbnailUrl ? `style="background-image: url('${thumbnailUrl}')"` : '';
+
+        return `
+          <div class="carousel-item">
+            <a href="${v.link || '#'}" target="_blank" rel="noopener" class="video-card-link">
+              <div class="video-card">
+                <div class="video-thumb" ${thumbStyle}>
+                  <div class="play">▶</div>
+                </div>
+                <div class="video-body">
+                  <div class="video-title">${escapeHtml(v.title || "Untitled")}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function createJobCarouselHTML(jobs) {
+      const latestJobs = jobs.slice(0, 6);
+      return latestJobs.map(j => {
+        const description = j.description ? (j.description.length > 100 ? j.description.substring(0, 100) + '…' : j.description) : '';
+
+        return `
+          <div class="carousel-item">
+            <div class="job-card">
+              <div class="job-title">${escapeHtml(j.title)}</div>
+              ${j.company ? `<div class="job-company">${escapeHtml(j.company)}</div>` : ''}
+              ${description ? `<div class=\"job-description\">${escapeHtml(description)}</div>` : ''} 
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Seamless auto-scroll using duplicated content and requestAnimationFrame
+    function enableAutoScroll(containerId, speedPxPerSec = 40) {
+      const row = document.getElementById(containerId);
+      const container = row?.closest('.carousel-container') || row;
+      if (!container) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let rafId = null, lastTs = null, resumeTimer = null;
+
+      const frame = (ts) => {
+        if (lastTs == null) lastTs = ts;
+        const dt = (ts - lastTs) / 1000; // time delta in seconds
+        lastTs = ts;
+
+        // Calculate the halfway point (end of the original content)
+        const halfwayPoint = container.scrollWidth / 2;
+
+        // Move the scroll position
+        container.scrollLeft += speedPxPerSec * dt;
+
+        // If we've scrolled past the original content, jump back to the start
+        if (container.scrollLeft >= halfwayPoint) {
+          container.scrollLeft -= halfwayPoint;
+        }
+
+        rafId = requestAnimationFrame(frame);
+      };
+
+      const start = () => {
+        if (prefersReduced || rafId) return; // Don't start if disabled or already running
+        lastTs = null;
+        rafId = requestAnimationFrame(frame);
+      };
+
+      const stop = () => {
+        cancelAnimationFrame(rafId);
+        rafId = null; // Reset the animation frame ID
+      };
+
+      const pauseAndResume = () => {
+        stop();
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(start, 1800);
+      };
+
+      // Add interaction listeners to pause/resume scrolling
+      container.addEventListener('mouseenter', stop);
+      container.addEventListener('mouseleave', start);
+      container.addEventListener('touchstart', pauseAndResume, { passive: true });
+      container.addEventListener('touchend', start, { passive: true });
+      container.addEventListener('wheel', pauseAndResume, { passive: true }); // Pause on scroll wheel
+      document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+
+      start();
+    }
+
+    // Arrow buttons for carousels
+    function wireCarouselButtons() {
+      document.querySelectorAll('.carousel-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const row = document.getElementById(targetId);
+          if (!row) return;
+          const container = row.closest('.carousel-container') || row;
+          const itemWidth = row.querySelector('.carousel-item')?.clientWidth || 320;
+          const delta = (btn.classList.contains('next') ? 1 : -1) * (itemWidth + 14);
+          const max = container.scrollWidth - container.clientWidth;
+          let nextLeft = container.scrollLeft + delta;
+          if (nextLeft < 0) nextLeft = max; // wrap to end
+          if (nextLeft > max) nextLeft = 0; // wrap to start
+          container.scrollTo({ left: nextLeft, behavior: 'smooth' });
+        });
+      });
+    }
+
+    // ----------------- FORM HANDLERS -----------------
+    async function handleNotificationForm(formId, subscriptionType) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+
+        // Validate at least one contact method
+        const email = fd.get("email");
+        const whatsapp = fd.get("whatsapp");
+        const telegram = fd.get("telegram");
+
+        if (!email && !whatsapp && !telegram) {
+          showToast("⚠️ Please provide at least one contact method (Email, WhatsApp, or Telegram)", "error");
+          return;
+        }
+
+        const payload = {
+          name: fd.get("name") || '',
+          email: email || '',
+          whatsapp: whatsapp || '',
+          telegram: telegram || '',
+          subscriptionType: subscriptionType
+        };
+
+        try {
+          const res = await fetch(`${API_BASE}/api/subscribe`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+          }
+
+          const j = await res.json();
+          if (j.success) {
+            showToast(`✅ Successfully subscribed to ${subscriptionType} notifications!`, "success");
+            form.reset();
+          } else {
+            showToast("❌ Failed: " + (j.error || "unknown error"), "error");
+          }
+        } catch (err) {
+          console.error('Subscription error:', err);
+          showToast("⚠️ Network error. Please try again later.", "error");
+        }
+      });
+    }
+
+    // ----------------- STATS ANIMATION -----------------
+    function animateNumber(element, target, duration = 2000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current);
+      }, 16);
+    }
+
+    async function loadAndAnimateStats(videoCount, jobCount) {
+      // Animate videos count
+      const videosElement = document.getElementById('totalVideos');
+      if (videosElement) {
+        animateNumber(videosElement, videoCount);
+      }
+
+      // Animate jobs count
+      const jobsElement = document.getElementById('totalJobs');
+      if (jobsElement) {
+        animateNumber(jobsElement, jobCount);
+      }
+
+      // Fetch and animate subscribers count
+      try {
+        const response = await fetch(`${API_BASE}/api/admin/subscribers`);
+        if (response.ok) {
+          const subscribers = await response.json();
+          const subscribersElement = document.getElementById('totalSubscribers');
+          if (subscribersElement) {
+            animateNumber(subscribersElement, subscribers.length);
+          }
+        } else {
+          // Fallback: show a random number for demo
+          const subscribersElement = document.getElementById('totalSubscribers');
+          if (subscribersElement) {
+            animateNumber(subscribersElement, Math.floor(Math.random() * 500) + 100);
+          }
+        }
+      } catch (error) {
+        console.log('Could not fetch subscribers count, using demo data');
+        // Fallback: show a random number for demo
+        const subscribersElement = document.getElementById('totalSubscribers');
+        if (subscribersElement) {
+          animateNumber(subscribersElement, Math.floor(Math.random() * 500) + 100);
+        }
+      }
+    }
+
+    // ----------------- INIT -----------------
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Load and display latest videos carousel
+      let videos = await fetchVideos();
+
+      // Add sample data if no videos are available
+      if (videos.length === 0) {
+        videos = [
+          { title: "JavaScript Fundamentals", language: "JavaScript", category: "Beginner", link: "https://youtube.com/watch?v=example1" },
+          { title: "Python for Beginners", language: "Python", category: "Beginner", link: "https://youtube.com/watch?v=example2" },
+          { title: "React Hooks Explained", language: "React", category: "Intermediate", link: "https://youtube.com/watch?v=example3" },
+          { title: "Node.js Backend Development", language: "Node.js", category: "Intermediate", link: "https://youtube.com/watch?v=example4" },
+          { title: "Database Design with SQL", language: "SQL", category: "Advanced", link: "https://youtube.com/watch?v=example5" },
+          { title: "HTML/CSS Mastery", language: "HTML/CSS", category: "Beginner", link: "https://youtube.com/watch?v=example6" }
+        ];
+      }
+
+      const videosCarousel = document.getElementById('latestVideosCarousel');
+      if (videosCarousel) {
+        const videoHTML = createVideoCarouselHTML(videos);
+        videosCarousel.innerHTML = videoHTML + videoHTML; // Duplicate content for seamless scroll
+        enableAutoScroll('latestVideosCarousel');
+      }
+
+      // Load and display latest jobs carousel
+      let jobs = await fetchJobs();
+
+      // Add sample data if no jobs are available
+      if (jobs.length === 0) {
+        jobs = [
+          { title: "Frontend Developer", company: "Tech Corp", category: "Private", jobType: "Full-time", description: "Looking for a skilled React developer", applyLink: "#" },
+          { title: "Python Developer", company: "StartupXYZ", category: "Private", jobType: "Full-time", description: "Backend development with Python and Django", applyLink: "#" },
+          { title: "Software Engineer", company: "BigTech Inc", category: "Private", jobType: "Full-time", description: "Full-stack development opportunity", applyLink: "#" },
+          { title: "Data Analyst", company: "Analytics Pro", category: "Private", jobType: "Contract", description: "Work with big data and machine learning", applyLink: "#" },
+          { title: "UI/UX Designer", company: "Design Studio", category: "Private", jobType: "Part-time", description: "Create beautiful user experiences", applyLink: "#" },
+          { title: "DevOps Engineer", company: "Cloud Solutions", category: "Private", jobType: "Full-time", description: "Manage cloud infrastructure and deployment", applyLink: "#" }
+        ];
+      }
+
+      const jobsCarousel = document.getElementById('latestJobsCarousel');
+      if (jobsCarousel) {
+        const jobHTML = createJobCarouselHTML(jobs);
+        jobsCarousel.innerHTML = jobHTML + jobHTML; // Duplicate content for seamless scroll
+        enableAutoScroll('latestJobsCarousel');
+      }
+
+      // Wire nav buttons
+      wireCarouselButtons();
+
+      // Setup notification forms
+      handleNotificationForm('videoNotificationForm', 'videos');
+      handleNotificationForm('jobNotificationForm', 'jobs');
+
+      // Load and animate stats
+      loadAndAnimateStats(videos.length, jobs.length);
+
+      // --- Secret admin access ---
+      let keySequence = '';
+      const targetSequence = 'admin';
+
+      // Add keyboard listener for admin access
+      document.addEventListener('keydown', (e) => {
+        // Skip if typing in input fields
+        if (e.target.tagName.toLowerCase() === 'input' ||
+          e.target.tagName.toLowerCase() === 'textarea' ||
+          e.target.contentEditable === 'true') {
+          return;
+        }
+
+        keySequence += e.key.toLowerCase();
+        if (keySequence.length > targetSequence.length) {
+          keySequence = keySequence.slice(-targetSequence.length);
+        }
+
+        console.log('Key sequence:', keySequence); // Debug log
+
+        if (keySequence === targetSequence) {
+          console.log('Admin access granted!'); // Debug log
+          keySequence = ''; // Reset sequence
+          window.location.href = './admin.html';
+        }
+      });
+
+      // Triple-tap on brand logo for mobile
+      const brandEl = document.querySelector('.brand');
+      let tapCount = 0;
+      let lastTap = 0;
+      const tapTimeout = 500; // Increased timeout
+
+      if (brandEl) {
+        brandEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          const now = new Date().getTime();
+          tapCount = (now - lastTap) < tapTimeout ? tapCount + 1 : 1;
+          lastTap = now;
+          console.log('Brand clicked, tap count:', tapCount); // Debug log
+
+          if (tapCount === 3) {
+            console.log('Triple tap detected! Going to admin...'); // Debug log
+            tapCount = 0; // Reset count
+            window.location.href = './admin.html';
+          }
+
+          // Reset count after timeout
+          setTimeout(() => {
+            if (tapCount > 0 && tapCount < 3) {
+              tapCount = 0;
+            }
+          }, tapTimeout);
+        });
+      }
+
+      // Reveal animations
+      document.querySelectorAll(".reveal").forEach((el, i) => {
+        setTimeout(() => el.classList.add("in"), i * 80);
+      });
+
+      // Hamburger menu toggle
+      const hamburger = document.querySelector('.hamburger-btn');
+      const nav = document.getElementById('main-nav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          nav.classList.toggle('active');
+          const isExpanded = nav.classList.contains('active');
+          hamburger.setAttribute('aria-expanded', isExpanded);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

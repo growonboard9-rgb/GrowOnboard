@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Community — GrowOnboard</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card-bg: #ffffff;
+      --glass: rgba(255, 107, 107, 0.1);
+      --muted: #666666;
+      --accent: #ff6b6b;
+      --accent-2: #ff8e53;
+      --success: #22c55e;
+      --danger: #ff4757;
+      --border-color: rgba(255, 107, 107, 0.2);
+      --glass-2: rgba(255, 107, 107, 0.05);
+      --text: #333333;
+      --text-light: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+        .brand img {
+      width: 65px;
+      height: 65px;
+      margin-right: 8px
+    }
+
+    body {
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-bottom: 80px;
+    }
+
+    /* header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .site-header .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.2s;
+      opacity: 0.98;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 0;
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all .2s ease;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--glass);
+      color: var(--accent);
+    }
+
+    .nav-btn:hover {
+      color: var(--accent);
+    }
+
+    .dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    .nav-dropdown:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Hamburger Menu */
+    .hamburger-btn {
+      display: none; /* Hidden by default */
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1001;
+    }
+
+    .hamburger-btn:focus {
+      outline: none;
+    }
+
+    .hamburger-btn span {
+      width: 2rem;
+      height: 0.25rem;
+      background: var(--text);
+      border-radius: 10px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: flex;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        flex-direction: column;
+        padding: 20px 0;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+
+      nav.active {
+        display: flex;
+      }
+    }
+
+    /* container */
+    main.container {
+      max-width: 1240px;
+      margin: 34px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* hero section */
+    .community-hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(255, 142, 83, 0.05) 100%);
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+
+    .community-hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .community-hero p {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* community grid */
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .community-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .community-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .community-card:hover::before {
+      left: 100%;
+    }
+
+    .community-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+    }
+
+    .community-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .community-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .community-card p {
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .community-btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .community-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    /* stats section */
+    .community-stats {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--border-color);
+      margin-bottom: 40px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-item h4 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .stat-item p {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* footer */
+    footer.site-footer {
+      max-width: 1240px;
+      margin: 80px auto 40px;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 24px;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      footer.site-footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-links a {
+        margin: 0 10px;
+      }
+
+      .community-hero h1 {
+        font-size: 36px;
+      }
+
+      .community-hero p {
+        font-size: 18px;
+      }
+    }
+
+    /* reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .45s ease, transform .45s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="./index.html" class="brand"><img src="./Logo.png" alt="GrowOnboard">GrowOnboard</a>
+      <button class="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="main-nav">
+        <div class="nav-dropdown">
+          <button class="nav-btn">About <span class="dropdown-arrow">▼</span></button>
+          <div class="dropdown-menu">
+            <a href="./about.html">About Us</a>
+            <a href="./contact.html">Contact Us</a>
+            <a href="./community.html">Community</a>
+          </div>
+        </div>
+        <a href="./jobs.html" class="nav-btn">Jobs</a>
+        <a href="./videos.html" class="nav-btn">Learning</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="community-hero">
+      <h1>Join Our Community</h1>
+      <p>Connect with fellow learners, share knowledge, and grow together in your tech journey. Our community is here to
+        support you every step of the way.</p>
+    </div>
+
+    <div class="community-grid">
+      <div class="community-card reveal">
+        <div class="community-icon">💬</div>
+        <h3>Discord Server</h3>
+        <p>Join our active Discord community for real-time discussions, study groups, and networking with fellow
+          developers.</p>
+        <a href="#" class="community-btn">Join Discord</a>
+      </div>
+
+      <div class="community-card reveal">
+        <div class="community-icon">📱</div>
+        <h3>WhatsApp Group</h3>
+        <p>Get instant updates on new videos, job opportunities, and connect with peers in our WhatsApp community group.
+        </p>
+        <a href="#" class="community-btn">Join WhatsApp</a>
+      </div>
+
+      <div class="community-card reveal">
+        <div class="community-icon">🐙</div>
+        <h3>GitHub Repository</h3>
+        <p>Contribute to our open-source projects, share your code, and collaborate with developers from around the
+          world.</p>
+        <a href="#" class="community-btn">View on GitHub</a>
+      </div>
+
+      <div class="community-card reveal">
+        <div class="community-icon">📧</div>
+        <h3>Newsletter</h3>
+        <p>Subscribe to our weekly newsletter for curated tech content, job alerts, and exclusive learning resources.
+        </p>
+        <a href="#" class="community-btn">Subscribe</a>
+      </div>
+
+      <div class="community-card reveal">
+        <div class="community-icon">🎯</div>
+        <h3>Study Groups</h3>
+        <p>Join study groups for different programming languages and technologies. Learn together and stay motivated.
+        </p>
+        <a href="#" class="community-btn">Find Study Groups</a>
+      </div>
+
+      <div class="community-card reveal">
+        <div class="community-icon">🏆</div>
+        <h3>Challenges & Contests</h3>
+        <p>Participate in coding challenges, hackathons, and contests to test your skills and win exciting prizes.</p>
+        <a href="#" class="community-btn">View Challenges</a>
+      </div>
+    </div>
+
+    <div class="community-stats reveal">
+      <h2 style="text-align: center; margin-bottom: 30px; color: var(--text);">Community Stats</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h4 id="discordMembers">2.5K+</h4>
+          <p>Discord Members</p>
+        </div>
+        <div class="stat-item">
+          <h4 id="whatsappMembers">1.8K+</h4>
+          <p>WhatsApp Members</p>
+        </div>
+        <div class="stat-item">
+          <h4 id="githubStars">500+</h4>
+          <p>GitHub Stars</p>
+        </div>
+        <div class="stat-item">
+          <h4 id="newsletterSubs">3.2K+</h4>
+          <p>Newsletter Subscribers</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2024 GrowOnboard • Learn. Apply. Grow.</span>
+    <div class="footer-links">
+      <a href="./about.html">About</a>
+      <a href="./contact.html">Contact</a>
+      <a href="mailto:contact@growonboard.com">📧 Email</a>
+      <a href="https://instagram.com/growonboard" target="_blank">📷 Instagram</a>
+      <a href="https://wa.me/1234567890" target="_blank">💬 WhatsApp</a>
+      <a href="https://linkedin.com/company/growonboard" target="_blank">💼 LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal animations
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".reveal").forEach((el, i) => {
+        setTimeout(() => el.classList.add("in"), i * 100);
+      });
+
+      // Hamburger menu toggle
+      const hamburger = document.querySelector('.hamburger-btn');
+      const nav = document.getElementById('main-nav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          nav.classList.toggle('active');
+          const isExpanded = nav.classList.contains('active');
+          hamburger.setAttribute('aria-expanded', isExpanded);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
