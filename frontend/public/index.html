@@ -657,7 +657,8 @@
       .footer-links a {
         margin: 0 10px;
       }
-      .video-card{
+
+      .video-card {
         flex-direction: column;
         height: 200px;
         text-align: center;
@@ -861,8 +862,8 @@
       border-radius: 10px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 14px;
       transition: all 0.2s;
+      float: right;
     }
 
     .expand-btn:hover {
@@ -880,13 +881,16 @@
       padding: 10px 0;
       -webkit-overflow-scrolling: touch;
       /* This is important to prevent snapping which interferes with smooth JS scroll */
-      scroll-snap-type: none; 
-      scrollbar-width: none; /* For Firefox */
-      -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+      scroll-snap-type: none;
+      scrollbar-width: none;
+      /* For Firefox */
+      -ms-overflow-style: none;
+      /* For Internet Explorer and Edge */
     }
 
     .carousel-container::-webkit-scrollbar {
-      display: none; /* For Chrome, Safari, and Opera */
+      display: none;
+      /* For Chrome, Safari, and Opera */
     }
 
     /* nav buttons */
@@ -932,6 +936,9 @@
         width: 30px;
         height: 30px;
       }
+      .section-header h2{
+        justify-content: center;
+      }
     }
 
     @media (hover:none) {
@@ -957,7 +964,7 @@
         min-width: 240px;
       }
 
-      .video-thumb {        
+      .video-thumb {
         width: 239px;
         min-width: 140px;
         height: 132px;
@@ -968,6 +975,7 @@
       from {
         transform: translateX(0);
       }
+
       to {
         transform: translateX(-50%);
       }
@@ -993,10 +1001,13 @@
         width: 85%;
         margin-left: 35px;
       }
-      #videoNotificationTitle, #jobNotificationTitle {
+
+      #videoNotificationTitle,
+      #jobNotificationTitle {
         margin-left: 70px;
       }
-      .section-intro{
+
+      .section-intro {
         text-align: center;
       }
     }
@@ -1111,7 +1122,7 @@
     <div class="section reveal" id="latestVideosSection">
       <div class="section-header">
         <h2>Latest Learning Videos</h2>
-        <a href="./videos.html" class="expand-btn">Show All</a>
+        
       </div>
       <p class="section-intro">Stay updated with our latest programming tutorials and tech content.</p>
       <div class="carousel-container">
@@ -1119,13 +1130,14 @@
           <!-- Videos will be loaded here -->
         </div>
       </div>
+      <a href="./videos.html" class="expand-btn">Show All</a>
     </div>
 
     <!-- Latest Jobs Section -->
     <div class="section reveal" id="latestJobsSection">
       <div class="section-header">
         <h2>Latest Job Opportunities</h2>
-        <a href="./jobs.html" class="expand-btn">Show All</a>
+        
       </div>
       <p class="section-intro">Discover the newest career opportunities in the tech industry.</p>
       <div class="carousel-container">
@@ -1133,6 +1145,7 @@
           <!-- Jobs will be loaded here -->
         </div>
       </div>
+      <a href="./jobs.html" class="expand-btn">Show All</a>
     </div>
 
     <!-- Notification Forms Section -->
