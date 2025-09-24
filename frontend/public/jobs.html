@@ -595,7 +595,7 @@
           </div>
           ${description ? `<div class="job-description">${escapeHtml(description)}</div>` : ''}
           <div class="job-meta">
-            ${j.deadline ? `<span class="job-deadline">Deadline: ${escapeHtml(j.deadline)}</span>` : ''}
+            ${j.deadline ? `<span class="job-deadline">Last Date to Apply: ${escapeHtml(j.deadline)}</span>` : ''}
           </div>
           <div class="apply-row">
             <a class="apply-btn" href="${j.applyLink || "#"}" target="_blank" rel="noopener">Apply Now</a>
