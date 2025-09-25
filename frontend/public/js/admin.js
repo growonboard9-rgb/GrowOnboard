@@ -1,5 +1,5 @@
 // admin.js - GrowOnboard
-const API_BASE = (location.hostname === 'localhost') ? 'http://localhost:5000' : 'https://growonboard.onrender.com';
+const API_BASE = (location.hostname === 'localhost') ? 'http://localhost:5000' : 'https://grow-onboard.vercel.app';
 
 // ---------- Firebase client config ----------
 const firebaseConfig = {
