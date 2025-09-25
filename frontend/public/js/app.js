@@ -2,7 +2,7 @@
 const API_BASE =
   location.hostname === "localhost" || location.hostname === ""
     ? "http://localhost:5000"
-    : "https://growonboard.onrender.com";
+    : "https://grow-onboard.vercel.app";
 
 // ----------------- UTILITIES -----------------
 function escapeHtml(s) {
@@ -221,6 +221,7 @@ function revealAnimate() {
     setTimeout(() => el.classList.add("in"), i * 80);
   });
 }
+
 
 
 
